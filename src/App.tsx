@@ -16,17 +16,18 @@ export const App: React.FC = () => {
   const [visibleMovies, setVisibleMovies] = useState<Movie[]>(moviesFromServer);
 
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuery = event.target.value.trim();
+    const inputValue = event.target.value;
+    const newQuery = inputValue.trim();
 
-    setQuery(event.target.value);
+    setQuery(inputValue);
 
-    const filterMovies = moviesFromServer.filter(
-      movie =>
-        movie.title.toLowerCase().includes(newQuery.toLowerCase()) ||
-        movie.description.toLowerCase().includes(newQuery.toLowerCase()),
+    setVisibleMovies(
+      moviesFromServer.filter(
+        movie =>
+          movie.title.toLowerCase().includes(newQuery.toLowerCase()) ||
+          movie.description.toLowerCase().includes(newQuery.toLowerCase()),
+      ),
     );
-
-    setVisibleMovies(filterMovies);
   };
 
   return (
